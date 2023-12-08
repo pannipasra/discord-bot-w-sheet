@@ -13,17 +13,17 @@ This project focuses on building a Discord bot that integrates seamlessly with t
 
 ## Usage
 - Create **.env** file (see the sample at **env.sample**)
-- Generate **credentails.json**, get from [Google sheet API](https://developers.google.com/sheets/api/quickstart/js)
+- Generate **credentails.json**, get from [Google sheet API](https://developers.google.com/sheets/api/quickstart/nodejs)
 -  ```npm install```
 - ```npm run dev``` or ```npm run start```
 
 ## Incorporation of External Code
 
-This project incorporates code from [google-api-nodejs-client GitRepo](https://github.com/googleapis/google-api-nodejs-client/tree/main), licensed under the Apache License, Version 2.0.
+This project incorporates code from [node-sample GitRepo](https://github.com/googleworkspace/node-samples), licensed under the Apache License, Version 2.0.
 
 ### Attribution
 
-This project incorporates code from [quickstart.js](https://github.com/googleapis/google-api-nodejs-client/blob/main/samples/sheets/quickstart.js), licensed under the Apache License, Version 2.0.
+This project incorporates code from [quickstart/index.js](https://github.com/googleworkspace/node-samples/blob/main/sheets/quickstart/index.js), licensed under the Apache License, Version 2.0.
 
 ```plaintext
 /**
@@ -43,4 +43,4 @@ This project incorporates code from [quickstart.js](https://github.com/googleapi
  */
  ```
 
-The code integration from [quickstart.js](https://github.com/googleapis/google-api-nodejs-client/blob/main/samples/sheets/quickstart.js) can be found within the [/sheet/helper.js](./sheet/sheet.helper.js) file in this repository.
+The code integration from [quickstart/index.js](https://github.com/googleworkspace/node-samples/blob/main/sheets/quickstart/index.js) can be found within the [/sheet/helper.js](./sheet/sheet.helper.js) file in this repository.
