@@ -68,13 +68,77 @@ export function createPlaintextTable(data) {
     return table;
 }
 
-export function createMarkdownList(data) {
-    let markdown = `* Currency Alert\n`;
+// const data = [
+//     ['JPY -> THB', 'THB -> JPY'],
+//     ['0.2453879', '4.074747']
+// ];
 
-    data.forEach((row) => {
-        const [currencyPair, value] = row;
-        markdown += `  - ${currencyPair}: ${value}\n`;
-    });
+export function extractCurrencyData(data) {
+    let _JPY2THB = '';
+    let _THB2JPY = '';
+    let valJPY2THB = '';
+    let valTHB2JPY = '';
 
-    return markdown;
+    for (let i = 0; i < data.length; i++) {
+        const row = data[i];
+        switch (i) {
+            case 0:
+                const [JPY2THB, THB2JPY] = row;
+                _JPY2THB += ` - ${JPY2THB}: `;
+                _THB2JPY += ` - ${THB2JPY}: `;
+                break;
+            default:
+                const [valJPY, valTHB] = row;
+                valJPY2THB += `${valJPY}`;
+                valTHB2JPY += `${valTHB}`;
+                break;
+        }
+    }
+
+    return {
+        valJPY2THB,
+        valTHB2JPY,
+    };
+}
+
+export function createMarkdownFromData(valJPY2THB, valTHB2JPY) {
+    const markdown = `* Currency Alert\n`;
+
+    const _JPY2THB = ` - JPY2THB: ${valJPY2THB}`;
+    const _THB2JPY = ` - THB2JPY: ${valTHB2JPY}`;
+
+    return `${markdown}${_JPY2THB}\n${_THB2JPY}\n`;
+}
+
+
+
+export function checkValJPY2THB(valJPY2THB, _tempValJPY2THB, criteriaDefualt = 0.245) {
+    if (valJPY2THB > criteriaDefualt) {
+        _tempValJPY2THB = valJPY2THB; // Assign valJPY2THB to _tempValJPY2THB
+        let valString = valJPY2THB.toString();
+        let tempValString = _tempValJPY2THB.toString();
+
+        if (valString.length >= 5 && tempValString.length >= 5) {
+            for (let i = 4; i < 8; i++) {
+                let valDigit = parseInt(valString.charAt(i));
+                let tempDigit = parseInt(tempValString.charAt(i));
+
+                if (valDigit > tempDigit) {
+                    return {
+                        isOk: true,
+                        isInterest: true
+                    };
+                } 
+            }
+        }
+
+        return {
+            isOk: true,
+            isInterest: false
+        }
+    }
+    return {
+        isOk: false,
+        isInterest: false
+    }
 }
